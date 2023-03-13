@@ -2,7 +2,7 @@ CREATE TABLE customer(
 	customer_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	first_name VARCHAR(20),
 	last_name VARCHAR(20),
-	customer_email VARCHAR(25),
+	email VARCHAR(25),
 	phone_number VARCHAR(10),
 	username VARCHAR(25),
 	password VARCHAR(25),
