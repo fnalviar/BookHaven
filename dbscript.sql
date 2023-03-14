@@ -12,14 +12,15 @@ CREATE TABLE customer(
 CREATE TABLE role(
 	role_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	role_name VARCHAR(15),
-	customer_id INT REFERENCES customer(customer_id)
+	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
 CREATE TABLE orders(
 	order_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	items JSON NOT NULL,
 	order_timestamp TIMESTAMP,
-	order_total NUMERIC (6,2),
-	customer_id INT REFERENCES customer(customer_id)
+	order_total NUMERIC (6,2) NOT NULL,
+	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
 CREATE TABLE payment(
@@ -28,29 +29,30 @@ CREATE TABLE payment(
 	card_name VARCHAR (25) NOT NULL,
 	expiration_date VARCHAR(4) NOT NULL,
 	cvv VARCHAR(3) NOT NULL,
-	customer_id INT REFERENCES customer(customer_id)
+	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
 CREATE TABLE book(
 	book_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	isbn INT NOT NULL,
-	title VARCHAR(50),
-	author_fname VARCHAR(20),
-	author_lname VARCHAR(20),
-	cover_image VARCHAR(265),
-	sypnosis VARCHAR(265),
+	title VARCHAR(50) NOT NULL,
+	author_fname VARCHAR(20) NOT NULL,
+	author_lname VARCHAR(20) NOT NULL,
+	cover_image VARCHAR(265) NOT NULL,
+	sypnosis VARCHAR(265) NOT NULL,
 	price NUMERIC (6,2) NOT NULL,
 	is_available BOOLEAN
 );
 
 CREATE TABLE cart(
 	cart_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	cart_items JSON NOT NULL,
 	created_date TIMESTAMP,
 	modified_date TIMESTAMP,
 	is_removed BOOLEAN,
-	cart_total NUMERIC (6,2),
-	customer_id INT REFERENCES customer(customer_id),
-	order_id INT REFERENCES orders(order_id)
+	cart_total NUMERIC (6,2) NOT NULL,
+	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE, 
+	order_id INT REFERENCES orders(order_id) ON DELETE CASCADE
 );
 
 CREATE TABLE billing(
@@ -60,6 +62,6 @@ CREATE TABLE billing(
 	city VARCHAR(25),
 	province VARCHAR(25),
 	postal_code VARCHAR(6),
-	customer_id INT REFERENCES customer(customer_id),
-	order_id INT REFERENCES orders(order_id)
+	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE,
+	order_id INT REFERENCES orders(order_id) ON DELETE CASCADE
 );

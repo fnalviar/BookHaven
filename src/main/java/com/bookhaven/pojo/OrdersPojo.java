@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class OrdersPojo {
 
 	private int orderId;
+	private int orderItems;
 	private Timestamp orderTimestamp;
 	private double orderTotal;
 	private int customerId;
@@ -19,6 +20,14 @@ public class OrdersPojo {
 
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
+	}
+
+	public int getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(int orderItems) {
+		this.orderItems = orderItems;
 	}
 
 	public Timestamp getOrderTimestamp() {
@@ -45,9 +54,10 @@ public class OrdersPojo {
 		this.customerId = customerId;
 	}
 
-	public OrdersPojo(int orderId, Timestamp orderTimestamp, double orderTotal, int customerId) {
+	public OrdersPojo(int orderId, int orderItems, Timestamp orderTimestamp, double orderTotal, int customerId) {
 		super();
 		this.orderId = orderId;
+		this.orderItems = orderItems;
 		this.orderTimestamp = orderTimestamp;
 		this.orderTotal = orderTotal;
 		this.customerId = customerId;
@@ -55,8 +65,8 @@ public class OrdersPojo {
 
 	@Override
 	public String toString() {
-		return "Orders [orderId=" + orderId + ", orderTimestamp=" + orderTimestamp + ", orderTotal=" + orderTotal
-				+ ", customerId=" + customerId + "]";
+		return "OrdersPojo [orderId=" + orderId + ", items=" + orderItems + ", orderTimestamp=" + orderTimestamp
+				+ ", orderTotal=" + orderTotal + ", customerId=" + customerId + "]";
 	}
 
 	@Override
@@ -64,6 +74,7 @@ public class OrdersPojo {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + customerId;
+		result = prime * result + orderItems;
 		result = prime * result + orderId;
 		result = prime * result + ((orderTimestamp == null) ? 0 : orderTimestamp.hashCode());
 		long temp;
@@ -83,6 +94,8 @@ public class OrdersPojo {
 		OrdersPojo other = (OrdersPojo) obj;
 		if (customerId != other.customerId)
 			return false;
+		if (orderItems != other.orderItems)
+			return false;
 		if (orderId != other.orderId)
 			return false;
 		if (orderTimestamp == null) {
@@ -94,6 +107,5 @@ public class OrdersPojo {
 			return false;
 		return true;
 	}
-	
 	
 }

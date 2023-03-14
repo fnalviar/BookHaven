@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class CartPojo {
 	
 	private int cartId;
+	private int cartItems;
 	private Timestamp createdDate;
 	private Timestamp modifiedDate;
 	private boolean isRemoved;
@@ -22,6 +23,14 @@ public class CartPojo {
 
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
+	}
+
+	public int getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(int cartItems) {
+		this.cartItems = cartItems;
 	}
 
 	public Timestamp getCreatedDate() {
@@ -72,10 +81,11 @@ public class CartPojo {
 		this.orderId = orderId;
 	}
 
-	public CartPojo(int cartId, Timestamp createdDate, Timestamp modifiedDate, boolean isRemoved, double cartTotal,
-			int customerId, int orderId) {
+	public CartPojo(int cartId, int cartItems, Timestamp createdDate, Timestamp modifiedDate, boolean isRemoved,
+			double cartTotal, int customerId, int orderId) {
 		super();
 		this.cartId = cartId;
+		this.cartItems = cartItems;
 		this.createdDate = createdDate;
 		this.modifiedDate = modifiedDate;
 		this.isRemoved = isRemoved;
@@ -86,9 +96,9 @@ public class CartPojo {
 
 	@Override
 	public String toString() {
-		return "CartPojo [cartId=" + cartId + ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate
-				+ ", isRemoved=" + isRemoved + ", cartTotal=" + cartTotal + ", customerId=" + customerId + ", orderId="
-				+ orderId + "]";
+		return "CartPojo [cartId=" + cartId + ", cartItems=" + cartItems + ", createdDate=" + createdDate
+				+ ", modifiedDate=" + modifiedDate + ", isRemoved=" + isRemoved + ", cartTotal=" + cartTotal
+				+ ", customerId=" + customerId + ", orderId=" + orderId + "]";
 	}
 
 	@Override
@@ -96,6 +106,7 @@ public class CartPojo {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + cartId;
+		result = prime * result + cartItems;
 		long temp;
 		temp = Double.doubleToLongBits(cartTotal);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -118,6 +129,8 @@ public class CartPojo {
 		CartPojo other = (CartPojo) obj;
 		if (cartId != other.cartId)
 			return false;
+		if (cartItems != other.cartItems)
+			return false;
 		if (Double.doubleToLongBits(cartTotal) != Double.doubleToLongBits(other.cartTotal))
 			return false;
 		if (createdDate == null) {
@@ -138,6 +151,5 @@ public class CartPojo {
 			return false;
 		return true;
 	}
-	
 	
 }
