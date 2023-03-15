@@ -20,7 +20,8 @@ CREATE TABLE orders(
 	items JSON NOT NULL,
 	order_timestamp TIMESTAMP,
 	order_total NUMERIC (6,2) NOT NULL,
-	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE
+	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE,
+	book_id INT REFERENCES book(book_id);
 );
 
 CREATE TABLE payment(
