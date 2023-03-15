@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -41,17 +39,13 @@ public class BookEntity {
 	
 	@Column(name="is_available")
 	private boolean isAvailable;
-	
-	@ManyToOne
-	@JoinColumn(name = "order_id")
-	private OrdersEntity ordersEntity;
 
 	public BookEntity() {
 		super();
 	}
 
 	public BookEntity(int bookId, int iSBN, String title, String authorFirstName, String authorLastName,
-			String coverImage, String sypnosis, double price, boolean isAvailable, OrdersEntity ordersEntity) {
+			String coverImage, String sypnosis, double price, boolean isAvailable) {
 		super();
 		this.bookId = bookId;
 		ISBN = iSBN;
@@ -62,11 +56,6 @@ public class BookEntity {
 		this.sypnosis = sypnosis;
 		this.price = price;
 		this.isAvailable = isAvailable;
-		this.ordersEntity = ordersEntity;
-	}
-	
-	public OrdersEntity getOrdersEntity() {
-		return ordersEntity;
 	}
 
 	public int getBookId() {
@@ -141,10 +130,6 @@ public class BookEntity {
 		this.isAvailable = isAvailable;
 	}
 
-	public void setOrdersEntity(OrdersEntity ordersEntity) {
-		this.ordersEntity = ordersEntity;
-	}
-
 	@Override
 	public String toString() {
 		return "BookEntity [bookId=" + bookId 
@@ -155,8 +140,7 @@ public class BookEntity {
 				+ ", coverImage=" + coverImage 
 				+ ", sypnosis=" + sypnosis 
 				+ ", price=" + price 
-				+ ", isAvailable=" + isAvailable + "]" 
-				+ "BookEntity [ordersEntity=" + ordersEntity + "]";
+				+ ", isAvailable=" + isAvailable + "]";
 	}
 
 	@Override

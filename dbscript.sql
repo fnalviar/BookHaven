@@ -9,20 +9,20 @@ CREATE TABLE customer(
 	role_id INT NOT NULL
 );
 
+CREATE TABLE orders(
+	order_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	items JSON NOT NULL,
+	order_timestamp TIMESTAMP,
+	order_total NUMERIC (6,2) NOT NULL,
+	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE
+);
+
 CREATE TABLE role(
 	role_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	role_name VARCHAR(15),
 	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
-CREATE TABLE orders(
-	order_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-	items JSON NOT NULL,
-	order_timestamp TIMESTAMP,
-	order_total NUMERIC (6,2) NOT NULL,
-	customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE,
-	book_id INT REFERENCES book(book_id);
-);
 
 CREATE TABLE payment(
 	payment_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
